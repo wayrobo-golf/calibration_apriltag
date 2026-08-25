@@ -1,0 +1,138 @@
+schema_version: 1
+
+job:
+  id: machine18_20260821_dynamic_calibration
+  dataset_date: "20260821"
+  report_title: "20260821 撞桥后码牌两-bag多组合动态标定与撞桥前位移评估"
+
+runtime:
+  novatel_message_dir: /home/wayrobo/picking_robot/share/novatel_oem7_msgs/msg
+  output_dir: ../runtime_outputs/20260821_dynamic_calibration
+  inventory_only: false
+  skip_validation: false
+
+machine:
+  serial: machine_18
+  camera_serial: left_camera
+  tag_rig_serial: v_board_18
+  config_dir: ../../../config/18
+  board_instance_id: board_setup_01
+
+rosbags:
+  calibration:
+    - {id: "104504", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104504}
+    - {id: "104602", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104602}
+    - {id: "104842", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104842}
+    - {id: "105223", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105223}
+    - {id: "105259", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105259}
+    - {id: "105335", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105335}
+    - {id: "105443", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105443}
+    - {id: "105549", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105549}
+    - {id: "105841", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105841}
+    - {id: "105937", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105937}
+    - {id: "110041", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_110041}
+  validation:
+    - {id: "105702", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105702}
+  displacement_evaluation:
+    - {id: "104131", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104131}
+    - {id: "104246", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104246}
+    - {id: "104315", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104315}
+  excluded:
+    - {id: "103540", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_103540, reason: old_tag_board}
+    - {id: "103616", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_103616, reason: old_tag_board}
+    - {id: "103653", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_103653, reason: old_tag_board_cutoff}
+
+topics:
+  image: /camera/left/image
+  odom: /novatel/oem7/ins_odom
+  inspvax: /novatel/oem7/inspvax
+  imu: /novatel/oem7/imu/data
+
+detection:
+  queue_capacity: 32
+  flush_timeout_s: 5.0
+  roi_xyxy: [560, 0, 1280, 650]
+  detector_nthreads: 1
+  quad_decimate: 1.0
+  quad_sigma: 0.0
+  refine_edges: 1
+  decode_sharpening: 0.25
+  maximum_translation_error_m: 0.10
+  maximum_rotation_error_deg: 2.0
+
+interpolation:
+  maximum_bracket_gap_ms: 50.0
+  maximum_endpoint_distance_ms: 30.0
+
+structural_gate:
+  minimum_safe_depth_m: 4.25
+  maximum_depth_m: 8.0
+  contact_candidate_depth_m: 3.5
+  acceleration_highpass_limit_mps2: 2.0
+  angular_rate_highpass_limit_degps: 6.0
+  highpass_window_s: 1.0
+  contact_confirmation_s: 0.1
+
+sampling:
+  minimum_xy_increment_m: 0.10
+  minimum_yaw_increment_deg: 0.20
+  maximum_time_increment_s: 0.50
+  maximum_frames_per_cell: 8
+  maximum_frames_per_bag: 48
+  minimum_bag_count: 2
+  minimum_bags_per_distance_bin: 1
+  minimum_total_frames: 40
+
+coverage:
+  distance_bin_edges_m: [4.5, 6.5]
+  minimum_bearing_span_deg: 0.1
+
+calibration:
+  maximum_depth_m: 8.0
+  maximum_depth_inclusive: false
+  maximum_combinations: 12
+  allow_failed_candidate_for_diagnostics: true
+  tag_geometry:
+    initialization_mode: bootstrap
+    maximum_views_per_station: 15
+    minimum_valid_stations: 2
+    minimum_balanced_views: 20
+    overall_reprojection_rms_max_px: 0.5
+    maximum_view_rms_max_px: 1.0
+    loo_translation_std_max_m: 0.005
+    loo_rotation_std_max_deg: 0.5
+    loo_translation_difference_max_m: 0.01
+    loo_rotation_difference_max_deg: 1.0
+    max_nfev: 500
+  solver:
+    deterministic_start_count: 21
+    max_nfev_per_start: 500
+    xtol: 1.0e-11
+    ftol: 1.0e-11
+    gtol: 1.0e-11
+    extrinsic_rotation_bound_deg: 5.0
+    irls_max_iterations: 10
+    irls_weight_tolerance: 1.0e-6
+    mad_consistency_factor: 1.4826
+    cutoff_mad_multiplier: 1.5
+    cutoff_min: 1.0
+    cutoff_max: 10.0
+    scaled_condition_number_max: 1000.0
+    multistart_extrinsic_spread_max_deg: 0.02
+    multistart_board_translation_spread_max_m: 0.005
+    multistart_board_rotation_spread_max_deg: 0.05
+    minimum_successful_multistarts: 21
+    covariance:
+      pixel_sigma_floor_px: 0.10
+      pixel_sigma_ceiling_px: 5.0
+      normal_matrix_rcond: 1.0e-12
+      scaled_eigenvalue_min: 1.0e-6
+      scaled_eigenvalue_max: 1.0e6
+      unmodelled_translation_floor_m: 0.001
+      unmodelled_rotation_floor_deg: 0.01
+  quality_gate:
+    quantile: 0.80
+    quantile_method: linear
+    position_limit_m: 0.03
+    yaw_limit_deg: 0.5
+    all_stations_must_pass: true
