@@ -751,9 +751,16 @@ def _write_day_report(
                 )
         if failures:
             lines.extend(["", "## 标定失败", ""])
-            lines.extend(
-                f"- `{row['candidate_id']}`: {row['error']}" for row in failures
-            )
+            for row in failures:
+                if "candidate_id" in row:
+                    failure_subject = f"candidate `{row['candidate_id']}`"
+                elif "bag_id" in row:
+                    failure_subject = f"bag `{row['bag_id']}`"
+                else:
+                    raise ValueError(
+                        "calibration failure must contain candidate_id or bag_id"
+                    )
+                lines.append(f"- {failure_subject}: {row['error']}")
         if validation_failures:
             lines.extend(["", "## 验证排除/失败", ""])
             lines.extend(

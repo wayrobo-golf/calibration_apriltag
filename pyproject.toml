@@ -1,7 +1,38 @@
 [build-system]
-requires = ["setuptools>=59.6", "wheel"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-q"
+[project]
+name = "dynamic-rosbag-calibration"
+version = "0.1.0"
+description = "Standalone multi-rosbag dynamic calibration library"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "numpy>=1.23",
+    "opencv-python-headless>=4.5",
+    "pyapriltags>=3.3",
+    "PyYAML>=5.4",
+    "rosbags>=0.9",
+    "scipy>=1.9",
+]
+
+[project.optional-dependencies]
+analysis = [
+    "plotly>=5.0",
+]
+
+[dependency-groups]
+test = [
+    "pytest>=6.2",
+]
+
+[project.scripts]
+dynamic-rosbag-calibration = "dynamic_rosbag_calibration.pipeline:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

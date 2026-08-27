@@ -1,46 +1,37 @@
 schema_version: 1
 
 job:
-  id: machine18_20260821_dynamic_calibration
-  dataset_date: "20260821"
-  report_title: "20260821 撞桥后码牌两-bag多组合动态标定与撞桥前位移评估"
+  id: machine18_20260827_dynamic_calibration
+  dataset_date: "20260827"
+  report_title: "20260827 码牌加固后标定评估"
 
 runtime:
-  novatel_message_dir: /home/wayrobo/picking_robot/share/novatel_oem7_msgs/msg
-  output_dir: ../runtime_outputs/20260821_dynamic_calibration
+  novatel_message_dir: ../msg
+  output_dir: ../outputs/20260827_dynamic_calibration
   inventory_only: false
   skip_validation: false
 
 machine:
-  serial: machine_18
+  serial: machine_14
   camera_serial: left_camera
-  tag_rig_serial: v_board_18
-  config_dir: ../../../config/18
+  tag_rig_serial: v_board_14
+  config_dir: ./14
   board_instance_id: board_setup_01
 
 rosbags:
   calibration:
-    - {id: "104504", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104504}
-    - {id: "104602", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104602}
-    - {id: "104842", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104842}
-    - {id: "105223", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105223}
-    - {id: "105259", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105259}
-    - {id: "105335", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105335}
-    - {id: "105443", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105443}
-    - {id: "105549", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105549}
-    - {id: "105841", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105841}
-    - {id: "105937", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105937}
-    - {id: "110041", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_110041}
+    - {id: "101648", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_101648}
+    - {id: "101921", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_101921}
+    - {id: "102151", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_102151}
+    - {id: "101837", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_101837}
+    - {id: "102103", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_102103}
+    - {id: "101752", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_101752}
   validation:
-    - {id: "105702", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_105702}
-  displacement_evaluation:
-    - {id: "104131", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104131}
-    - {id: "104246", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104246}
-    - {id: "104315", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_104315}
-  excluded:
-    - {id: "103540", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_103540, reason: old_tag_board}
-    - {id: "103616", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_103616, reason: old_tag_board}
-    - {id: "103653", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260821/2_rosbag/bag_20260821_103653, reason: old_tag_board_cutoff}
+    - {id: "102016", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_102016}
+    - {id: "102235", path: /home/share_data/gjf/unloading_using_apriltag_and_pnp/20260827/bag_20260827_102235}
+  displacement_evaluation: []
+  excluded: []
+
 
 topics:
   image: /camera/left/image

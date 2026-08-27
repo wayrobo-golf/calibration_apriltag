@@ -34,6 +34,7 @@ def _write_test_config(tmp_path: Path) -> Path:
         rosbags[role] = entries
 
     payload["job"]["id"] = "unit_test"
+    payload["job"]["dataset_date"] = "20260821"
     payload["runtime"]["novatel_message_dir"] = str(message_dir)
     payload["runtime"]["output_dir"] = "outputs/result"
     payload["machine"]["config_dir"] = str(machine_dir)
